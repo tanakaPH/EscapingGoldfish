@@ -1,0 +1,100 @@
+//App情報（日本語版）
+とんずらペーちゃん
+
+https://docs.google.com/document/d/1xfRo7TznPUpVssvc1Vd0NBAWnAljH1-Q34-ujHHWcWY/edit?usp=sharing
+
+英語（アメリカ）
+
+ゲーム（アクション、アドベンチャー）
+エンターテインメント
+
+
+//App情報（英語版）
+EscapingGoldfish
+
+https://docs.google.com/document/d/1xfRo7TznPUpVssvc1Vd0NBAWnAljH1-Q34-ujHHWcWY/edit?usp=sharing
+
+英語（アメリカ）
+
+ゲーム（アクション、アドベンチャー）
+エンターテインメント
+
+
+//AppStore情報（英語版）
+・First Release
+
+game, action, escape, goldfish, sea, river, fish, water, trap, adventure, japan, festival, pond,bowl
+
+https://www.facebook.com/EgoTech-Community-105456541002506/
+
+2020 EgoTech Community
+
+・今後Appの品質を高めるために、Firebaseでユーザの操作ログを収集しています
+・AdMobを使って広告を表示しています
+・画像及びサウンドの著作権は遵守しています（表記が必要なものはエンドロールに記載）
+
+
+Please help the goldfish escaping!
+
+▼Introduction
+Flick to control the goldfish and bring him the goal!
+However, there are many traps disturbing him in the stage!
+If traps, his life is decreased!
+Help him escaping and reaching Eden before the life is none!
+
+▼How to play
+[START] -> start from the first stage
+[CONTINUE] -> start from the latest stage
+[CONFIG] -> app configuration like languages
+*This game automatically saves the data.
+ The saved data is valid until game over.
+
+▼Notes
+・The name and events in this app is fiction.
+・Please contact through supporting URL if you want to inquiry.
+・We don't  take any responsibility or liability for any damage or loss caused through this app.
+
+▼Production
+EgoTech Community
+Yuki Tanaka
+
+
+//AppStore情報（日本語版）
+・初回リリース
+
+ゲーム,冒険,脱出,アドベンチャー,金魚,魚,海,川,池,沼,金魚鉢,脱出ゲーム,とんずら,ペーちゃん,水,罠,夏祭り,祭り,アクション,鯉,コイ,ザリガニ,なまず,ナマズ,魚類,生き物,渦潮,うず
+
+https://www.facebook.com/EgoTech-Community-105456541002506/
+
+2020 EgoTech Community
+
+・今後Appの品質を高めるために、Firebaseでユーザの操作ログを収集しています
+・AdMobを使って広告を表示しています
+・画像及びサウンドの著作権は遵守しています（表記が必要なものはエンドロールに記載）
+
+金魚のぺーちゃんのとんずらを助けて！！
+
+▼ゲーム概要
+フリックで金魚のペーちゃんを上下左右に操作し、ゴールへ連れて行こう！
+でもステージには、ぺーちゃんの行く手を阻むトラップがいっぱい！
+トラップに捕まると、ライフが減ってしまうぞ！
+ライフがなくなる前に、ペーちゃんが自由を尊重できるエデン（理想郷）への到達を目指そう！
+
+▼遊び方
+「最初からや！」->　ゲームを最初から始めます。
+「続きからや！」->　中断したステージから始めます。
+「設定」　　　　->　アプリ内言語などの各種設定ができます。
+※このゲームはオートセーブです。ゲームオーバーになると、セーブデータがリセットされます。
+
+▼注意事項
+・本編の物語はフィクションです。実在する人物及び団体とは一切関係ありません。
+・不具合報告、各種問い合わせはサポートURLからメッセージでお問い合わせください。
+・本アプリケーションを使用したことによる様々な被害及び損害に関して、制作者は一切責任を負いません。
+
+▼制作・著作
+EgoTech Community
+Yuki Tanaka
+
+
+
+

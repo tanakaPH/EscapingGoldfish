@@ -1,0 +1,37 @@
+{
+  "client": [
+    {
+      "services": {
+        "appinvite_service": {
+          "status": 1
+        }, 
+        "analytics_service": {
+          "status": 0
+        }
+      }, 
+      "oauth_client": [
+        {
+          "client_id": "445393571590-lg8i4qlsc4g7ofbespublfe7mm3t7jpa.apps.googleusercontent.com"
+        }
+      ], 
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYSuKy_9m2aPTDmVgVzYFCo3IHiST1rBI"
+        }
+      ], 
+      "client_info": {
+        "mobilesdk_app_id": "1:445393571590:ios:f1c7203158aa984ac95887", 
+        "android_client_info": {
+          "package_name": "com.EgoTechCommunity.EscapingGoldfish"
+        }
+      }
+    }
+  ], 
+  "configuration_version": "1", 
+  "project_info": {
+    "storage_bucket": "escapinggoldfish.appspot.com", 
+    "project_id": "escapinggoldfish", 
+    "firebase_url": "https://escapinggoldfish.firebaseio.com", 
+    "project_number": "445393571590"
+  }
+}
