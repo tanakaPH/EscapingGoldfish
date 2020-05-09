@@ -1376,10 +1376,8 @@ MonoBehaviour:
   m_image_jp: {fileID: 0}
   m_image_en: {fileID: 0}
   m_text_jp: "\u4ECA\u66F4\u3084\u3051\u3069\u3001\u4E0A\u306B\u8868\u793A\u3055\u308C\u3066\u308B\n\u306E\u306F\u308F\u3044\u306E\u30E9\u30A4\u30D5\u3084\u3002"
-  m_text_en: 'I think you''ve already noticed, but
-
-    the upper goldfish icon shows
-    my life.'
+  m_text_en: "I think you've already noticed, \nbut the upper goldfish icon \nshows
+    my life."
 --- !u!1 &1017860731
 GameObject:
   m_ObjectHideFlags: 0

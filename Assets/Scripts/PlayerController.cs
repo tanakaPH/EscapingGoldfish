@@ -77,11 +77,15 @@ public class PlayerController : MonoBehaviour
 
     void PreloadRewardedAd()
     {
-        //Release Id is below.
-        //adUnitId = "ca-app-pub-6565480179137292/6885444494";
+        #if UNITY_IOS
+        adUnitId = "ca-app-pub-6565480179137292/6885444494";
 
-        //Test Id is below.
+        #elif UNITY_ANDROID
+        adUnitId = "ca-app-pub-6565480179137292/7001437440";
+
+        #else
         adUnitId = "ca-app-pub-3940256099942544/1712485313";
+        #endif
 
         this.continueAd = new RewardedAd(adUnitId);
 
