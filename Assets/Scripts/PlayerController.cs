@@ -108,12 +108,26 @@ public class PlayerController : MonoBehaviour
 
     public void HandleRewardedAdLoaded(object sender, EventArgs args)
     {
-
+        if (GameObject.Find("GameOverPanel").GetComponent<RectTransform>().localScale.x == 1)
+        {
+            this.continueAd.Show();
+        }
     }
 
     public void HandleRewardedAdFailedToLoad(object sender, AdErrorEventArgs args)
     {
-        
+        if (GameObject.Find("GameOverPanel").GetComponent<RectTransform>().localScale.x == 1)
+        {
+            GameObject.Find("AdErrorText").GetComponent<RectTransform>().localScale = new Vector3(1, 1, 0);
+        }
+
+        Firebase.Analytics.FirebaseAnalytics.LogEvent(
+            "AD_LOADING_ERROR",
+            new Firebase.Analytics.Parameter[] {
+                new Firebase.Analytics.Parameter(
+                    "message", args.Message)
+            }
+            );
     }
 
     public void HandleRewardedAdOpening(object sender, EventArgs args)
@@ -123,7 +137,18 @@ public class PlayerController : MonoBehaviour
 
     public void HandleRewardedAdFailedToShow(object sender, AdErrorEventArgs args)
     {
-        
+        if (GameObject.Find("GameOverPanel").GetComponent<RectTransform>().localScale.x == 1)
+        {
+            GameObject.Find("AdErrorText").GetComponent<RectTransform>().localScale = new Vector3(1, 1, 0);
+        }
+
+        Firebase.Analytics.FirebaseAnalytics.LogEvent(
+            "AD_SHOWING_ERROR",
+            new Firebase.Analytics.Parameter[] {
+                new Firebase.Analytics.Parameter(
+                    "message", args.Message)
+            }
+            );
     }
 
     public void HandleUserEarnedReward(object sender, Reward args)
