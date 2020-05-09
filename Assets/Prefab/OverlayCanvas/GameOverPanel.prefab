@@ -697,7 +697,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u30CD\u30C3\u30C8\u30EF\u30FC\u30AF\u306B\u63A5\u7D9A\u3057\u3066\u304F\u3060\u3055\u3044\u3002"
+  m_Text: "\u30A4\u30F3\u30BF\u30FC\u30CD\u30C3\u30C8\u306B\u63A5\u7D9A\u3057\u3066\u304F\u3060\u3055\u3044\u3002"
 --- !u!114 &1748846920411682860
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -712,7 +712,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_image_jp: {fileID: 0}
   m_image_en: {fileID: 0}
-  m_text_jp: "\u30CD\u30C3\u30C8\u30EF\u30FC\u30AF\u306B\u63A5\u7D9A\u3057\u3066\u304F\u3060\u3055\u3044\u3002"
+  m_text_jp: "\u30A4\u30F3\u30BF\u30FC\u30CD\u30C3\u30C8\u306B\u63A5\u7D9A\u3057\u3066\u304F\u3060\u3055\u3044\u3002"
   m_text_en: Please connect to the internet.
 --- !u!1 &7091141235420445633
 GameObject:
