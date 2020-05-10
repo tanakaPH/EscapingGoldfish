@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -77,15 +79,15 @@ public class PlayerController : MonoBehaviour
 
     void PreloadRewardedAd()
     {
-        #if UNITY_IOS
+#if UNITY_IOS
         adUnitId = "ca-app-pub-6565480179137292/6885444494";
 
-        #elif UNITY_ANDROID
+#elif UNITY_ANDROID
         adUnitId = "ca-app-pub-6565480179137292/7001437440";
 
-        #else
+#else
         adUnitId = "ca-app-pub-3940256099942544/1712485313";
-        #endif
+#endif
 
         this.continueAd = new RewardedAd(adUnitId);
 
@@ -108,26 +110,12 @@ public class PlayerController : MonoBehaviour
 
     public void HandleRewardedAdLoaded(object sender, EventArgs args)
     {
-        if (GameObject.Find("GameOverPanel").GetComponent<RectTransform>().localScale.x == 1)
-        {
-            this.continueAd.Show();
-        }
+
     }
 
     public void HandleRewardedAdFailedToLoad(object sender, AdErrorEventArgs args)
     {
-        if (GameObject.Find("GameOverPanel").GetComponent<RectTransform>().localScale.x == 1)
-        {
-            GameObject.Find("AdErrorText").GetComponent<RectTransform>().localScale = new Vector3(1, 1, 0);
-        }
-
-        Firebase.Analytics.FirebaseAnalytics.LogEvent(
-            "AD_LOADING_ERROR",
-            new Firebase.Analytics.Parameter[] {
-                new Firebase.Analytics.Parameter(
-                    "message", args.Message)
-            }
-            );
+        Firebase.Analytics.FirebaseAnalytics.LogEvent("ADMOB_LOAD_ERROR", "message", args.Message);
     }
 
     public void HandleRewardedAdOpening(object sender, EventArgs args)
@@ -137,18 +125,7 @@ public class PlayerController : MonoBehaviour
 
     public void HandleRewardedAdFailedToShow(object sender, AdErrorEventArgs args)
     {
-        if (GameObject.Find("GameOverPanel").GetComponent<RectTransform>().localScale.x == 1)
-        {
-            GameObject.Find("AdErrorText").GetComponent<RectTransform>().localScale = new Vector3(1, 1, 0);
-        }
-
-        Firebase.Analytics.FirebaseAnalytics.LogEvent(
-            "AD_SHOWING_ERROR",
-            new Firebase.Analytics.Parameter[] {
-                new Firebase.Analytics.Parameter(
-                    "message", args.Message)
-            }
-            );
+        Firebase.Analytics.FirebaseAnalytics.LogEvent("ADMOB_SHOW_ERROR", "message", args.Message);
     }
 
     public void HandleUserEarnedReward(object sender, Reward args)
@@ -478,6 +455,11 @@ public class PlayerController : MonoBehaviour
         else
         {
             PreloadRewardedAd();
+
+            if (GameObject.Find("GameOverPanel").GetComponent<RectTransform>().localScale.x == 1)
+            {
+                GameObject.Find("AdErrorText").GetComponent<RectTransform>().localScale = new Vector3(1, 1, 0);
+            }
         }
     }
 
