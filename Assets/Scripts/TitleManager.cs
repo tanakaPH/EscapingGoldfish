@@ -58,8 +58,10 @@ public class TitleManager : MonoBehaviour
             }
         });
         */
-
-        Firebase.Analytics.FirebaseAnalytics.LogEvent(Firebase.Analytics.FirebaseAnalytics.EventAppOpen);
+        if (!Debug.isDebugBuild)
+        {
+            Firebase.Analytics.FirebaseAnalytics.LogEvent(Firebase.Analytics.FirebaseAnalytics.EventAppOpen);
+        }
     }
 
     void SetUpAdMob()
