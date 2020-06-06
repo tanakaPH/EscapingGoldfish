@@ -79,10 +79,13 @@ public class StageManager : MonoBehaviour
         PlayerPrefs.SetInt("ContinueCount", Static.continueCount);
         PlayerPrefs.Save();
 
-        Firebase.Analytics.FirebaseAnalytics.LogEvent(Firebase.Analytics.FirebaseAnalytics.EventLevelStart,
+        if (!Debug.isDebugBuild)
+        {
+            Firebase.Analytics.FirebaseAnalytics.LogEvent(Firebase.Analytics.FirebaseAnalytics.EventLevelStart,
             new Firebase.Analytics.Parameter[] {
                 new Firebase.Analytics.Parameter(Firebase.Analytics.FirebaseAnalytics.ParameterLevelName, "Stage" + Static.stageName),
             });
+        }
     }
 
     public static void SetLife()

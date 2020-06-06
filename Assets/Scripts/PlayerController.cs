@@ -39,6 +39,7 @@ public class PlayerController : MonoBehaviour
     //動画リワード広告表示用
     private RewardedAd continueAd;
     private string adUnitId;
+    private int loadTryCount;
 
     void Start()
     {
@@ -75,6 +76,7 @@ public class PlayerController : MonoBehaviour
     {
         isGoal = false;
         isTrap = false;
+        loadTryCount = 0;
     }
 
     void PreloadRewardedAd()
@@ -105,17 +107,35 @@ public class PlayerController : MonoBehaviour
         this.continueAd.OnAdClosed += HandleRewardedAdClosed;
 
         AdRequest request = new AdRequest.Builder().Build();
+
         this.continueAd.LoadAd(request);
+        loadTryCount++;
     }
 
     public void HandleRewardedAdLoaded(object sender, EventArgs args)
     {
-
+        //ボタン押下による広告リロード成功時
+        if (GameObject.Find("GameOverPanel").GetComponent<RectTransform>().localScale.x == 1)
+        {
+            GameObject.Find("ContinueButton").GetComponent<Button>().interactable = true;
+        }
+        loadTryCount = 0;
     }
 
     public void HandleRewardedAdFailedToLoad(object sender, AdErrorEventArgs args)
     {
         Firebase.Analytics.FirebaseAnalytics.LogEvent("ADMOB_LOAD_ERROR", "message", args.Message);
+
+        //広告ロード失敗時3回までリトライ
+        if (loadTryCount <= 3)
+        {
+            PreloadRewardedAd();
+        }
+        //ボタン押下で更に失敗した場合
+        else if (GameObject.Find("GameOverPanel").GetComponent<RectTransform>().localScale.x == 1)
+        {
+            GameObject.Find("ContinueButton").GetComponent<Button>().interactable = true;
+        }
     }
 
     public void HandleRewardedAdOpening(object sender, EventArgs args)
@@ -136,13 +156,18 @@ public class PlayerController : MonoBehaviour
 
     public void HandleRewardedAdClosed(object sender, EventArgs args)
     {
+        //広告を最後まで見た場合
         if (Static.life == 3)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
+        //広告を途中でスキップした場合
         else
         {
             StageManager.bgm[0].Play();
+
+            //広告再ロード完了までボタンを非アクティブに
+            GameObject.Find("ContinueButton").GetComponent<Button>().interactable = false;
             PreloadRewardedAd();
         }
     }
@@ -380,11 +405,14 @@ public class PlayerController : MonoBehaviour
         GetComponent<AudioSource>().PlayOneShot(gameClearSE);
         await Task.Delay(3000);
 
-        Firebase.Analytics.FirebaseAnalytics.LogEvent(Firebase.Analytics.FirebaseAnalytics.EventLevelEnd,
-            new Firebase.Analytics.Parameter[] {
+        if (!Debug.isDebugBuild)
+        {
+            Firebase.Analytics.FirebaseAnalytics.LogEvent(Firebase.Analytics.FirebaseAnalytics.EventLevelEnd,
+                new Firebase.Analytics.Parameter[] {
                 new Firebase.Analytics.Parameter(Firebase.Analytics.FirebaseAnalytics.ParameterLevelName, "Stage" + Static.stageName),
                 new Firebase.Analytics.Parameter(Firebase.Analytics.FirebaseAnalytics.ParameterSuccess, 1)
-            });
+                });
+        }
 
         Static.isStageFirst = true;
 
@@ -416,23 +444,29 @@ public class PlayerController : MonoBehaviour
         GetComponent<AudioSource>().PlayOneShot(missSE);
         await Task.Delay(3000);
 
-        Firebase.Analytics.FirebaseAnalytics.LogEvent(Firebase.Analytics.FirebaseAnalytics.EventLevelEnd,
+        if (!Debug.isDebugBuild)
+        {
+            Firebase.Analytics.FirebaseAnalytics.LogEvent(Firebase.Analytics.FirebaseAnalytics.EventLevelEnd,
             new Firebase.Analytics.Parameter[] {
                 new Firebase.Analytics.Parameter(Firebase.Analytics.FirebaseAnalytics.ParameterLevelName, "Stage" + Static.stageName),
                 new Firebase.Analytics.Parameter(Firebase.Analytics.FirebaseAnalytics.ParameterSuccess, 0)
             });
+        }
 
         Static.isStageFirst = false;
         Static.life--;
 
         if (Static.life <= 0)
         {
-            Firebase.Analytics.FirebaseAnalytics.LogEvent(Firebase.Analytics.FirebaseAnalytics.EventSpendVirtualCurrency,
+            if (!Debug.isDebugBuild)
+            {
+                Firebase.Analytics.FirebaseAnalytics.LogEvent(Firebase.Analytics.FirebaseAnalytics.EventSpendVirtualCurrency,
                 new Firebase.Analytics.Parameter[]{
                     new Firebase.Analytics.Parameter(Firebase.Analytics.FirebaseAnalytics.ParameterItemName, "Stage" + Static.stageName),
                     new Firebase.Analytics.Parameter(Firebase.Analytics.FirebaseAnalytics.ParameterVirtualCurrencyName, "ContinueCount"),
                     new Firebase.Analytics.Parameter(Firebase.Analytics.FirebaseAnalytics.ParameterValue, Static.continueCount)
                 });
+            }
 
             GameObject.Find("GameOverPanel").GetComponent<RectTransform>().localScale = new Vector3(1, 1, 0);
         }
@@ -454,6 +488,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
+            GameObject.Find("ContinueButton").GetComponent<Button>().interactable = false;
             PreloadRewardedAd();
 
             if (GameObject.Find("GameOverPanel").GetComponent<RectTransform>().localScale.x == 1)
