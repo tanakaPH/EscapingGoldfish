@@ -480,6 +480,7 @@ public class PlayerController : MonoBehaviour
     {
         if (Application.internetReachability == NetworkReachability.NotReachable)
         {
+            GameObject.Find("AdErrorText").GetComponent<RectTransform>().localScale = new Vector3(0, 1, 0);
             GameObject.Find("NetworkErrorText").GetComponent<RectTransform>().localScale = new Vector3(1, 1, 0);
         }
         else if (this.continueAd.IsLoaded())
@@ -493,6 +494,7 @@ public class PlayerController : MonoBehaviour
 
             if (GameObject.Find("GameOverPanel").GetComponent<RectTransform>().localScale.x == 1)
             {
+                GameObject.Find("NetworkErrorText").GetComponent<RectTransform>().localScale = new Vector3(0, 1, 0);
                 GameObject.Find("AdErrorText").GetComponent<RectTransform>().localScale = new Vector3(1, 1, 0);
             }
         }

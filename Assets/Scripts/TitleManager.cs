@@ -58,7 +58,7 @@ public class TitleManager : MonoBehaviour
             }
         });
         */
-        if (!Debug.isDebugBuild)
+        if (!Debug.isDebugBuild && Static.isFirstOpen == false)
         {
             Firebase.Analytics.FirebaseAnalytics.LogEvent(Firebase.Analytics.FirebaseAnalytics.EventAppOpen);
         }
@@ -105,6 +105,7 @@ public class TitleManager : MonoBehaviour
         Static.hardMode = 0;
         Static.life = 0;
         Static.continueCount = 0;
+        Static.isFirstOpen = true;
     }
 
     public async void PressStartButton()

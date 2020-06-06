@@ -29,4 +29,7 @@ public class Static : MonoBehaviour
 
     //コンティニューした回数
     public static int continueCount;
+
+    //Firebase多重登録防止変数
+    public static bool isFirstOpen;
 }
