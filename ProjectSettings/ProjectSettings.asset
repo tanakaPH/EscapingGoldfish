@@ -170,7 +170,7 @@ PlayerSettings:
     iPhone: com.EgoTechCommunity.EscapingGoldfish
   buildNumber:
     iPhone: 0
-  AndroidBundleVersionCode: 0
+  AndroidBundleVersionCode: 1
   AndroidMinSdkVersion: 19
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 1
