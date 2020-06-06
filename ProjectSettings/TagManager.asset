@@ -8,6 +8,7 @@ TagManager:
   - obstacle
   - trap
   - life
+  - salt
   layers:
   - Default
   - TransparentFX

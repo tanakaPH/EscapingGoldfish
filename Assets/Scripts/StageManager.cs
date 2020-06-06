@@ -42,6 +42,11 @@ public class StageManager : MonoBehaviour
         {
             SetTime();
         }
+
+        //*****Debug*****
+        Debug.Log("saltMode = " + Static.saltMode + " PP = " + PlayerPrefs.GetInt("SaltMode", 0));
+        Debug.Log("saltCount = " + Static.saltCount + " PP = " + PlayerPrefs.GetInt("SaltCount", 0));
+
     }
 
     void Update()
@@ -70,6 +75,7 @@ public class StageManager : MonoBehaviour
         Static.mainStageNum = mainStageNum;
         Static.subStageNum = subStageNum;
         Static.stageName = mainStageNum + "-" + subStageNum;
+        Static.saltCount = PlayerPrefs.GetInt("SaltCount", 0);
     }
 
     void SaveState()
@@ -105,6 +111,11 @@ public class StageManager : MonoBehaviour
         if(Static.isStageFirst == true && Static.stageName == "4-3")
         {
             GameObject.FindGameObjectWithTag("life").transform.localScale = new Vector3(1, 1, 0);
+        }
+
+        if (Static.saltMode == 1 && GameObject.FindGameObjectWithTag("salt"))
+        {
+            GameObject.FindGameObjectWithTag("salt").transform.localScale = new Vector3(1, 1, 0);
         }
     }
 

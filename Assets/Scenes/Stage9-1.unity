@@ -1035,7 +1035,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 50
+    m_FontSize: 40
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 0
@@ -1046,7 +1046,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "VerUP\u3067\u65B0\u8981\u7D20\u958B\u653E\u4E88\u5B9A\uFF01\nComing Soon\uFF01"
+  m_Text: "\u30B9\u30C6\u30FC\u30B8\u306B\u843D\u3061\u3066\u3044\u308B\u5869\u3092\n\u5168\u90E8GET\u3059\u308B\u3068\u2026!?"
 --- !u!222 &542139655
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1069,9 +1069,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_image_jp: {fileID: 0}
   m_image_en: {fileID: 0}
-  m_text_jp: "VerUP\u3067\u65B0\u8981\u7D20\u8FFD\u52A0\u4E88\u5B9A\uFF01\nComing
-    soon!"
-  m_text_en: "New stages will be \ncoming soon!!"
+  m_text_jp: "\u30B9\u30C6\u30FC\u30B8\u306B\u843D\u3061\u3066\u3044\u308B\u5869\u3092\n\u5168\u90E8GET\u3059\u308B\u3068\u2026!?"
+  m_text_en: "Something will happen if you \nget all salts in the stage..."
 --- !u!1 &548707260
 GameObject:
   m_ObjectHideFlags: 0

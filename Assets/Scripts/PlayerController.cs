@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     GameObject goal;
     GameObject[] trap;
     GameObject[] obstacle;
+    GameObject salt;
 
     //ゴール処理、トラップ処理中かを判断する
     public bool isGoal;
@@ -70,6 +71,7 @@ public class PlayerController : MonoBehaviour
         this.goal = GameObject.FindGameObjectWithTag("goal");
         this.trap = GameObject.FindGameObjectsWithTag("trap");
         this.obstacle = GameObject.FindGameObjectsWithTag("obstacle");
+        this.salt = GameObject.FindGameObjectWithTag("salt");
     }
 
     void InitializeVariable()
@@ -397,6 +399,13 @@ public class PlayerController : MonoBehaviour
             Static.life++;
             StageManager.SetLife();
         }
+
+        if (collision.tag == "salt")
+        {
+            GetComponent<AudioSource>().PlayOneShot(recoverSE);
+            GameObject.FindWithTag("salt").SetActive(false);
+            Static.saltCount++;
+        }
     }
 
     //次のStageに移動
@@ -415,6 +424,7 @@ public class PlayerController : MonoBehaviour
         }
 
         Static.isStageFirst = true;
+        PlayerPrefs.SetInt("SaltCount", Static.saltCount);
 
         if (Static.stageName == "0-1")
         {
@@ -478,6 +488,12 @@ public class PlayerController : MonoBehaviour
 
     public void PressContinueButton()
     {
+#if UNITY_EDITOR
+        Static.life = 3;
+        Static.continueCount++;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
+#else
         if (Application.internetReachability == NetworkReachability.NotReachable)
         {
             GameObject.Find("AdErrorText").GetComponent<RectTransform>().localScale = new Vector3(0, 1, 0);
@@ -498,6 +514,7 @@ public class PlayerController : MonoBehaviour
                 GameObject.Find("AdErrorText").GetComponent<RectTransform>().localScale = new Vector3(1, 1, 0);
             }
         }
+#endif
     }
 
     public async void PressGameOverButton()
@@ -509,6 +526,7 @@ public class PlayerController : MonoBehaviour
         await Task.Delay(6000);
         PlayerPrefs.DeleteKey("LatestStage");
         PlayerPrefs.DeleteKey("LatestLife");
+        PlayerPrefs.DeleteKey("SaltCount");
         SceneManager.LoadScene("Title");
     }
 }

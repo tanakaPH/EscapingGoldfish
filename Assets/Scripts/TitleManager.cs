@@ -100,7 +100,7 @@ public class TitleManager : MonoBehaviour
         Static.mainStageNum = 0;
         Static.subStageNum = 1;
         Static.stageName = "0-1";
-        Static.saltMode = 0;
+        Static.saltMode = PlayerPrefs.GetInt("SaltMode", 0);
         Static.saltCount = 0;
         Static.hardMode = 0;
         Static.life = 0;
@@ -113,7 +113,9 @@ public class TitleManager : MonoBehaviour
         GameObject.Find("StartButton").GetComponent<AudioSource>().Play();
         await Task.Delay(200);
 
-        if(PlayerPrefs.GetInt("TutorialSkip", 0) == 1)
+        PlayerPrefs.SetInt("SaltCount", 0);
+
+        if (PlayerPrefs.GetInt("TutorialSkip", 0) == 1)
         {
             SceneManager.LoadScene("Stage1-1");
         }
@@ -128,6 +130,7 @@ public class TitleManager : MonoBehaviour
         GameObject.Find("ContinueButton").GetComponent<AudioSource>().Play();
         await Task.Delay(200);
 
+        Static.saltCount = PlayerPrefs.GetInt("SaltCount", 0);
         Static.life = PlayerPrefs.GetInt("LatestLife", 1);
         Static.continueCount = PlayerPrefs.GetInt("ContinueCount", 0);
         SceneManager.LoadScene("Stage" + PlayerPrefs.GetString("LatestStage", "0-1"));
