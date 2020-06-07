@@ -52,7 +52,7 @@ public class MovingTrap : MonoBehaviour
             if (transform.name == "BlueGill(Clone)")    MoveBlueGill();
             if (transform.name == "WhirlPool")          MoveWhirlPool();
             if (transform.name == "WhirlPoolX")         MoveWhirlPoolX();
-            //if (transform.name.Contains("WhirlPool_"))  MoveWhirlPoolClone();
+            if (transform.name.Contains("WhirlPool_"))  MoveWhirlPoolClone();
 
             if (transform.name == "FishBorn")   MoveFishBorn();
             if (transform.name == "FishBornX")   MoveFishBornX();
@@ -62,6 +62,9 @@ public class MovingTrap : MonoBehaviour
                 Static.isPopUp == false)        MoveCatFish();
 
             if (transform.name == "HumanBall(Clone)") MoveHumanBall();
+
+            if (transform.name == "SharkL(Clone)") MoveSharkL();
+            if (transform.name == "SharkR(Clone)") MoveSharkR();
         }
     }
 
@@ -285,7 +288,7 @@ public class MovingTrap : MonoBehaviour
 
         if(transform.name == "WhirlPool_LD")
         {
-            GetComponent<RectTransform>().anchoredPosition = Vector3.MoveTowards(currentPosition, new Vector3(-75, -75, 0), step);
+            GetComponent<RectTransform>().anchoredPosition = Vector3.MoveTowards(currentPosition, new Vector3(825, 1125, 0), step);
         }
         if (transform.name == "WhirlPool_LU")
         {
@@ -425,6 +428,24 @@ public class MovingTrap : MonoBehaviour
     {
         transform.Translate(-0.01f, 0, 0);
         if (gameObject.GetComponent<RectTransform>().anchoredPosition.x < -150.0f)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    void MoveSharkL()
+    {
+        transform.Translate(-0.02f, 0, 0);
+        if (gameObject.GetComponent<RectTransform>().anchoredPosition.x < -75.0f)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    void MoveSharkR()
+    {
+        transform.Translate(-0.02f, 0, 0);
+        if (gameObject.GetComponent<RectTransform>().anchoredPosition.x > 825.0f)
         {
             Destroy(gameObject);
         }

@@ -32,13 +32,13 @@ public class StageManager : MonoBehaviour
 
         SetTextWindowInfo();
 
-        if (mainStageNum != 9)
+        if (mainStageNum != 9 && mainStageNum != 10)
         {
             SetLife();
             SetObject();
         }
 
-        if (mainStageNum == 4 || Static.stageName == "5-3")
+        if (mainStageNum == 4 || Static.stageName == "5-3" || mainStageNum == 6)
         {
             SetTime();
         }
@@ -55,7 +55,7 @@ public class StageManager : MonoBehaviour
         {
             ForwardText();
         }
-        if ((mainStageNum == 4 || Static.stageName == "5-3") &&
+        if ((mainStageNum == 4 || Static.stageName == "5-3" || mainStageNum == 6) &&
             Static.isMenu == false && Static.isPopUp == false && Static.isMenu == false &&
             GameObject.Find("GoldFish").GetComponent<PlayerController>().isTrap == false &&
             GameObject.Find("GoldFish").GetComponent<PlayerController>().isGoal == false)
@@ -113,7 +113,7 @@ public class StageManager : MonoBehaviour
             GameObject.FindGameObjectWithTag("life").transform.localScale = new Vector3(1, 1, 0);
         }
 
-        if (Static.saltMode == 1 && GameObject.FindGameObjectWithTag("salt"))
+        if (Static.saltMode >= 1 && GameObject.FindGameObjectWithTag("salt"))
         {
             GameObject.FindGameObjectWithTag("salt").transform.localScale = new Vector3(1, 1, 0);
         }
@@ -130,7 +130,7 @@ public class StageManager : MonoBehaviour
             Static.isPopUp = false;
             popUpTextCount = 2;
         }
-        else if (Static.mainStageNum == 9)
+        else if (Static.mainStageNum == 9 || Static.mainStageNum == 10)
         {
             Static.isStory = true;
             storyTextCount = 2;
@@ -198,7 +198,7 @@ public class StageManager : MonoBehaviour
                 Static.isStory = false;
                 Static.isPopUp = true;
             }
-            else if (Static.mainStageNum == 9)
+            else if (Static.mainStageNum == 9 || Static.mainStageNum == 10)
             {
                 GameObject.Find("StoryPanel" + storyPanelCount).SetActive(false);
                 GetComponent<AudioSource>().PlayOneShot(tapSE);
@@ -216,9 +216,16 @@ public class StageManager : MonoBehaviour
 
             GetComponent<AudioSource>().PlayOneShot(tapSE);
 
-            if (storyPanelCount == 3 && Static.stageName == "9-1")
+            if (storyPanelCount == 3 && (Static.stageName == "9-1" || Static.stageName == "10-1"))
             {
-                Static.saltMode = 1;
+                if (Static.saltCount >= 18)
+                {
+                    Static.saltMode = 2;
+                }
+                else
+                {
+                    Static.saltMode = 1;
+                }
                 PlayerPrefs.SetInt("SaltMode", Static.saltMode);
                 PlayerPrefs.DeleteKey("LatestStage");
                 PlayerPrefs.DeleteKey("LatestLife");

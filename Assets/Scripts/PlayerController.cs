@@ -387,9 +387,12 @@ public class PlayerController : MonoBehaviour
         //罠に触れた場合
         if (collision.tag == "trap")
         {
-            GameObject.Find("TitleButton").GetComponent<Button>().interactable = false;
-            isTrap = true;
-            Miss();
+            if (isTrap == false)
+            {
+                GameObject.Find("TitleButton").GetComponent<Button>().interactable = false;
+                isTrap = true;
+                Miss();
+            }
         }
 
         if (collision.tag == "life")
@@ -432,7 +435,18 @@ public class PlayerController : MonoBehaviour
         }
         else if (Static.stageName == "5-3")
         {
-            SceneManager.LoadScene("Stage9-1");
+            if (Static.saltCount >= 15)
+            {
+                SceneManager.LoadScene("Stage6-1");
+            }
+            else
+            {
+                SceneManager.LoadScene("Stage9-1");
+            }
+        }
+        else if (Static.stageName == "6-3")
+        {
+            SceneManager.LoadScene("Stage10-1");
         }
         else if(Static.subStageNum < 3)
         {

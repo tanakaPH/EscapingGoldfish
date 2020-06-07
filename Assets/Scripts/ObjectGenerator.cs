@@ -18,6 +18,8 @@ public class ObjectGenerator : MonoBehaviour
     float deltaA;
     float deltaB;
 
+    int counter = 0;
+
     void Start()
     {
         //ステージ開始時のみ即時生成するための代入
@@ -31,6 +33,14 @@ public class ObjectGenerator : MonoBehaviour
             GameObject.Find("GoldFish").GetComponent<PlayerController>().isTrap == false &&
             Static.isPopUp == false && Static.isMenu == false && Static.isStory == false )
         {
+            //生成までにラグがあるため、初期のみ意図的に２匹生成
+            for (; counter < 2; counter++)
+            {
+                if (Static.stageName == "5-1") GenerateBlueGill();
+                if (Static.mainStageNum == 6) GenerateSharkL();
+                if (Static.stageName == "6-3") GenerateSharkR();
+            }
+
             this.deltaA += Time.deltaTime;
             this.deltaB += Time.deltaTime;
 
@@ -40,13 +50,15 @@ public class ObjectGenerator : MonoBehaviour
 
                 if (Static.mainStageNum == 3 || Static.stageName == "5-1") GenerateBlueGill();
                 if (Static.stageName == "5-3") GenerateHumanBall();
+                if (Static.mainStageNum == 6) GenerateSharkL();
             }
 
             if (this.deltaB > this.spanB)
             {
                 this.deltaB = 0;
 
-                //if (Static.stageName == "3-3") GenerateWhirlPool();
+                if (Static.stageName == "6-2") GenerateWhirlPool();
+                if (Static.stageName == "6-3") GenerateSharkR();
             }
         }
 
@@ -62,20 +74,17 @@ public class ObjectGenerator : MonoBehaviour
 
     void GenerateWhirlPool()
     {
-        if (GameObject.Find("WhirlPoolX").GetComponent<RectTransform>().localScale.x <= 1.7f)
-        {
-            objectB = Instantiate(prefabB) as GameObject;
-            objectB.name = "WhirlPool_LD";
-            objectB.transform.SetParent(this.transform);
-            objectB.transform.localScale = new Vector3(0.4f, 0.4f, 1);
-            objectB.GetComponent<RectTransform>().anchoredPosition = new Vector3(375f, 675f, 0);
+        objectB = Instantiate(prefabB) as GameObject;
+        objectB.name = "WhirlPool_LD";
+        objectB.transform.SetParent(this.transform);
+        objectB.transform.localScale = new Vector3(0.4f, 0.4f, 1);
+        objectB.GetComponent<RectTransform>().anchoredPosition = new Vector3(375f, 675f, 0);
 
-            GameObject objectC = Instantiate(prefabB) as GameObject;
-            objectC.name = "WhirlPool_LU";
-            objectC.transform.SetParent(this.transform);
-            objectC.transform.localScale = new Vector3(0.4f, 0.4f, 1);
-            objectC.GetComponent<RectTransform>().anchoredPosition = new Vector3(375f, 675f, 0);
-        }
+        GameObject objectC = Instantiate(prefabB) as GameObject;
+        objectC.name = "WhirlPool_LU";
+        objectC.transform.SetParent(this.transform);
+        objectC.transform.localScale = new Vector3(0.4f, 0.4f, 1);
+        objectC.GetComponent<RectTransform>().anchoredPosition = new Vector3(375f, 675f, 0);
     }
 
     void GenerateHumanBall()
@@ -89,6 +98,22 @@ public class ObjectGenerator : MonoBehaviour
         {
             this.deltaA = 1.0f;
         }
+    }
+
+    void GenerateSharkL()
+    {
+        objectA = Instantiate(prefabA) as GameObject;
+        objectA.transform.SetParent(this.transform);
+        objectA.transform.localScale = new Vector3(1f, 1f, 1);
+        objectA.GetComponent<RectTransform>().anchoredPosition = new Vector3(900f, GenerateRandomY(), 0);
+    }
+
+    void GenerateSharkR()
+    {
+        objectB = Instantiate(prefabB) as GameObject;
+        objectB.transform.SetParent(this.transform);
+        objectB.transform.localScale = new Vector3(1f, 1f, 1);
+        objectB.GetComponent<RectTransform>().anchoredPosition = new Vector3(-150f, GenerateRandomY(), 0);
     }
 
     public float GenerateRandomY()
@@ -150,6 +175,41 @@ public class ObjectGenerator : MonoBehaviour
                 case 5: return 1050f;
                 case 6: return 150f;
                 default: return 1050f;
+            }
+        }
+        else if (Static.stageName == "6-1")
+        {
+            int rand = Random.Range(0, 3);
+            switch (rand)
+            {
+                case 0: return 375f;
+                case 1: return 825f;
+                case 2: return 1125f;
+                default: return 1125f;
+            }
+        }
+        else if (Static.stageName == "6-2")
+        {
+            int rand = Random.Range(0, 3);
+            switch (rand)
+            {
+                case 0: return 525f;
+                case 1: return 825f;
+                case 2: return 1125f;
+                default: return 1125f;
+            }
+        }
+        else if (Static.stageName == "6-3")
+        {
+            int rand = Random.Range(0, 5);
+            switch (rand)
+            {
+                case 0: return 225f;
+                case 1: return 525f;
+                case 2: return 975f;
+                case 3: return 1125f;
+                case 4: return 675f;
+                default: return 225f;
             }
         }
         else
