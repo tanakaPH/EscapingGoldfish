@@ -22,6 +22,12 @@ public class ObjectGenerator : MonoBehaviour
 
     void Start()
     {
+        if (Static.hardMode == 1)
+        {
+            spanA = spanA / 2;
+            spanB = spanB / 2;
+        }
+
         //ステージ開始時のみ即時生成するための代入
         deltaA = spanA;
         deltaB = spanB;
@@ -94,7 +100,7 @@ public class ObjectGenerator : MonoBehaviour
         objectA.transform.localScale = new Vector3(1f, 1f, 1);
         objectA.GetComponent<RectTransform>().anchoredPosition = new Vector3(900f, GenerateRandomY(), 0);
 
-        if(StageManager.time < 15.0f)
+        if(StageManager.time < 15.0f && Static.hardMode == 0)
         {
             this.deltaA = 1.0f;
         }

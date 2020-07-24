@@ -6,6 +6,8 @@ using GoogleMobileAds.Api;
 
 public class TitleManager : MonoBehaviour
 {
+    private int hardButtonCount = 0;
+
     private void Awake()
     {
         SetUpFireBase();
@@ -102,10 +104,16 @@ public class TitleManager : MonoBehaviour
         Static.stageName = "0-1";
         Static.saltMode = PlayerPrefs.GetInt("SaltMode", 0);
         Static.saltCount = 0;
-        Static.hardMode = 0;
+        Static.hardMode = PlayerPrefs.GetInt("HardMode", 0);
         Static.life = 0;
         Static.continueCount = 0;
         Static.isFirstOpen = true;
+
+        if (Static.hardMode == 1)
+        {
+            GameObject.Find("WaterSurfaceA").transform.localScale = new Vector3(0, 1, 0);
+            GameObject.Find("WaterSurfaceB").transform.localScale = new Vector3(0, 1, 0);
+        }
     }
 
     public async void PressStartButton()
@@ -168,5 +176,31 @@ public class TitleManager : MonoBehaviour
         GameObject.Find("ConfigPanel").GetComponent<RectTransform>().localScale = new Vector3(0, 1, 0);
         GameObject.Find("ConfigButton").GetComponent<Button>().interactable = true;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void PressHardButton()
+    {
+        if (hardButtonCount < 6)
+        {
+            hardButtonCount++;
+        }
+        else
+        {
+            if (Static.hardMode == 0)
+            {
+                Static.hardMode = 1;
+                GameObject.Find("WaterSurfaceA").transform.localScale = new Vector3(0, 1, 0);
+                GameObject.Find("WaterSurfaceB").transform.localScale = new Vector3(0, 1, 0);
+                GameObject.Find("HardButton").GetComponent<AudioSource>().Play();
+            }
+            else
+            {
+                Static.hardMode = 0;
+                GameObject.Find("WaterSurfaceA").transform.localScale = new Vector3(0.7f, 0.7f, 1);
+                GameObject.Find("WaterSurfaceB").transform.localScale = new Vector3(0.7f, 0.7f, 1);
+            }
+            PlayerPrefs.SetInt("HardMode", Static.hardMode);
+            hardButtonCount = 0;
+        }
     }
 }

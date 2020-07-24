@@ -42,11 +42,6 @@ public class StageManager : MonoBehaviour
         {
             SetTime();
         }
-
-        //*****Debug*****
-        Debug.Log("saltMode = " + Static.saltMode + " PP = " + PlayerPrefs.GetInt("SaltMode", 0));
-        Debug.Log("saltCount = " + Static.saltCount + " PP = " + PlayerPrefs.GetInt("SaltCount", 0));
-
     }
 
     void Update()
@@ -113,7 +108,7 @@ public class StageManager : MonoBehaviour
             GameObject.FindGameObjectWithTag("life").transform.localScale = new Vector3(1, 1, 0);
         }
 
-        if (Static.saltMode >= 1 && GameObject.FindGameObjectWithTag("salt"))
+        if (Static.saltMode >= 1 && GameObject.FindGameObjectWithTag("salt") && Static.mainStageNum != 6)
         {
             GameObject.FindGameObjectWithTag("salt").transform.localScale = new Vector3(1, 1, 0);
         }

@@ -126,8 +126,6 @@ public class PlayerController : MonoBehaviour
 
     public void HandleRewardedAdFailedToLoad(object sender, AdErrorEventArgs args)
     {
-        Firebase.Analytics.FirebaseAnalytics.LogEvent("ADMOB_LOAD_ERROR", "message", args.Message);
-
         //広告ロード失敗時3回までリトライ
         if (loadTryCount <= 3)
         {
@@ -136,6 +134,7 @@ public class PlayerController : MonoBehaviour
         //ボタン押下で更に失敗した場合
         else if (GameObject.Find("GameOverPanel").GetComponent<RectTransform>().localScale.x == 1)
         {
+            Firebase.Analytics.FirebaseAnalytics.LogEvent("ADMOB_LOAD_ERROR", "message", args.Message);
             GameObject.Find("ContinueButton").GetComponent<Button>().interactable = true;
         }
     }
@@ -210,7 +209,12 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Mouse0))
         {
             touchEndPos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Input.mousePosition.z);
-            GetDirection();
+
+            //どちらかにリセット値が入っている場合は処理を無視（start及びendに必ず値が入っていることが条件）
+            if (touchStartPos != new Vector3(0, 0, 0) && touchEndPos != new Vector3(0, 0, 0))
+            {
+                GetDirection();
+            }
         }
 
     }
@@ -242,6 +246,9 @@ public class PlayerController : MonoBehaviour
                 DButtonDown();
             }
         }
+        //リセット処理
+        touchStartPos = new Vector3(0, 0, 0);
+        touchEndPos = new Vector3(0, 0, 0);
     }
 
     //左ボタンが押された時

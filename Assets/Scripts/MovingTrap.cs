@@ -146,6 +146,12 @@ public class MovingTrap : MonoBehaviour
     void MovePoi()
     {
         speed = 300;
+
+        if (Static.hardMode == 1)
+        {
+            speed = speed * 2;
+        }
+
         step = speed * Time.deltaTime;
 
         if (currentPosition.y.Equals(480) && currentPosition.x < 500)
@@ -169,6 +175,12 @@ public class MovingTrap : MonoBehaviour
     void MoveCrayFish()
     {
         speed = 50;
+
+        if (Static.hardMode == 1)
+        {
+            speed = speed * 2;
+        }
+
         step = speed * Time.deltaTime;
 
         span = 1.5f;
@@ -201,6 +213,12 @@ public class MovingTrap : MonoBehaviour
     void MoveCrayFishX()
     {
         speed = 100;
+
+        if (Static.hardMode == 1)
+        {
+            speed = speed * 2;
+        }
+
         step = speed * Time.deltaTime;
 
         span = 0.5f;
@@ -235,6 +253,12 @@ public class MovingTrap : MonoBehaviour
         Vector3 targetPosition = GameObject.Find("GoldFish").GetComponent<RectTransform>().anchoredPosition;
 
         speed = 100;
+
+        if (Static.hardMode == 1)
+        {
+            speed = speed * 2;
+        }
+
         step = speed * Time.deltaTime;
 
         span = 0.5f;
@@ -245,7 +269,15 @@ public class MovingTrap : MonoBehaviour
 
     void MoveBlueGill()
     {
-        transform.Translate(-0.01f, 0, 0);
+        if (Static.hardMode == 1)
+        {
+            transform.Translate(-0.02f, 0, 0);
+        }
+        else
+        {
+            transform.Translate(-0.01f, 0, 0);
+        }
+
         if (gameObject.GetComponent<RectTransform>().anchoredPosition.x < -75.0f)
         {
             Destroy(gameObject);
@@ -284,6 +316,12 @@ public class MovingTrap : MonoBehaviour
         MoveWhirlPool();
 
         speed = 100;
+
+        if (Static.hardMode == 1)
+        {
+            speed = speed * 2;
+        }
+
         step = speed * Time.deltaTime;
 
         if(transform.name == "WhirlPool_LD")
@@ -304,6 +342,12 @@ public class MovingTrap : MonoBehaviour
     void MoveFishBorn()
     {
         speed = 300;
+
+        if (Static.hardMode == 1)
+        {
+            speed = speed * 2;
+        }
+
         step = speed * Time.deltaTime;
 
         if (currentPosition.x >= 75 && mode == 1)
@@ -330,7 +374,13 @@ public class MovingTrap : MonoBehaviour
 
     void MoveFishBornX()
     {
-        speed = 300;
+        speed = 200;
+
+        if (Static.hardMode == 1)
+        {
+            speed = speed * 2;
+        }
+
         step = speed * Time.deltaTime;
 
         if (currentPosition.x >= initPosition.x - 225 && mode == 1)
@@ -357,7 +407,13 @@ public class MovingTrap : MonoBehaviour
 
     void MoveFishBornXR()
     {
-        speed = 300;
+        speed = 200;
+
+        if (Static.hardMode == 1)
+        {
+            speed = speed * 2;
+        }
+
         step = speed * Time.deltaTime;
 
         if (currentPosition.x <= initPosition.x + 225 && mode == 1)
@@ -426,7 +482,15 @@ public class MovingTrap : MonoBehaviour
 
     void MoveHumanBall()
     {
-        transform.Translate(-0.01f, 0, 0);
+        if (Static.hardMode == 1)
+        {
+            transform.Translate(-0.02f, 0, 0);
+        }
+        else
+        {
+            transform.Translate(-0.01f, 0, 0);
+        }
+
         if (gameObject.GetComponent<RectTransform>().anchoredPosition.x < -150.0f)
         {
             Destroy(gameObject);
@@ -435,7 +499,15 @@ public class MovingTrap : MonoBehaviour
 
     void MoveSharkL()
     {
-        transform.Translate(-0.02f, 0, 0);
+        if (Static.hardMode == 1)
+        {
+            transform.Translate(-0.04f, 0, 0);
+        }
+        else
+        {
+            transform.Translate(-0.02f, 0, 0);
+        }
+
         if (gameObject.GetComponent<RectTransform>().anchoredPosition.x < -75.0f)
         {
             Destroy(gameObject);
@@ -444,7 +516,15 @@ public class MovingTrap : MonoBehaviour
 
     void MoveSharkR()
     {
-        transform.Translate(-0.02f, 0, 0);
+        if (Static.hardMode == 1)
+        {
+            transform.Translate(-0.04f, 0, 0);
+        }
+        else
+        {
+            transform.Translate(-0.02f, 0, 0);
+        }
+
         if (gameObject.GetComponent<RectTransform>().anchoredPosition.x > 825.0f)
         {
             Destroy(gameObject);
